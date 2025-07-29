@@ -7,3 +7,22 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+//enviar formulario contacto
+document.getElementById('contact-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    fetch('https://example.com/api/contact', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert('Mensaje enviado correctamente!');
+        this.reset();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Hubo un problema al enviar el mensaje.');
+    });
+});
